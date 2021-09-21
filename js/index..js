@@ -22,7 +22,7 @@ function sendRequest(event) {
                     var x = document.getElementById('air_conditioner');
                     if (event.target.checked === true) {
                         x.classList.add('appliance__active');
-                    }else{
+                    } else {
                         x.classList.remove('appliance__active');
                     }
                     break;
@@ -30,7 +30,7 @@ function sendRequest(event) {
                     var x = document.getElementById('led_bulb');
                     if (event.target.checked === true) {
                         x.classList.add('appliance__active');
-                    }else{
+                    } else {
                         x.classList.remove('appliance__active');
                     }
                     break;
@@ -38,7 +38,7 @@ function sendRequest(event) {
                     var x = document.getElementById('television');
                     if (event.target.checked === true) {
                         x.classList.add('appliance__active');
-                    }else{
+                    } else {
                         x.classList.remove('appliance__active');
                     }
                     break;
@@ -46,7 +46,7 @@ function sendRequest(event) {
                     var x = document.getElementById('speaker');
                     if (event.target.checked === true) {
                         x.classList.add('appliance__active');
-                    }else{
+                    } else {
                         x.classList.remove('appliance__active');
                     }
                     break;
@@ -68,3 +68,26 @@ function sendRequest(event) {
     xhttp.send(JSON.stringify(data));
 }
 
+// To Make Menu Scrollable
+const menu = document.querySelector('.sub__heading ul');
+let isDown = false;
+let startX;
+let scrollLeft;
+menu.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - menu.offsetLeft;
+    scrollLeft = menu.scrollLeft;
+});
+menu.addEventListener('mouseleave', () => {
+    isDown = false;
+});
+menu.addEventListener('mouseup', () => {
+    isDown = false;
+});
+menu.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - menu.offsetLeft;
+    const walk = (x - startX) * 3; //scroll-fast
+    menu.scrollLeft = scrollLeft - walk;
+});
