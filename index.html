@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Home</title>
+    <!-- Stylesheet -->
+    <link rel="Stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <!-- Header Start -->
+    <header>
+        <h1 class="main__heading">My Home</h1>
+        <div class="sub__heading">
+            <ul>
+                <li class="active">Living room</li>
+                <li>Kitchen</li>
+                <li>Drawing room</li>
+                <li>Dining</li>
+            </ul>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Living Room Image -->
+    <img class="livingroom__img" src="https://images.unsplash.com/photo-1501876725168-00c445821c9e" alt="Living Room">
+
+    <!-- All Appliances  Start-->
+
+    <main class="all__appliances">
+        <div class="row row__first">
+            <div class="appliance" id="air_conditioner">
+                <!-- AIR CONDITIONAR SVG -->
+                <img src="./img/icons/air_conditioner.svg" alt="Air Conditioner" class="appliance__icon">
+                <!-- AIR CONDITIONAR SVG END -->
+                <h2 class="appliance__heading">Air Conditioner</h2>
+                <p>Samsung AC</p>
+                <div class="radio__button">
+                    <label class="switch">
+                        <input type="checkbox" value="air_conditioner" onclick="sendRequest(event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="appliance" id="led_bulb">
+                <!-- LED BULB SVG START -->
+                <img src="./img/icons/led_bulb.svg" alt="LED Bulb" class="appliance__icon">
+                <!-- LED BULB SVG END -->
+                <h2 class="appliance__heading">LED Bulb</h2>
+                <p>Philips LED</p>
+                <div class="radio__button">
+                    <label class="switch">
+                        <input type="checkbox" value="led_bulb" onclick="sendRequest(event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="appliance" id="television">
+                <!-- TELEVISION SVG START -->
+                <img src="./img/icons/television.svg" alt="Television" class="appliance__icon">
+                <!-- TELEVISION SVG END -->
+                <h2 class="appliance__heading">Television</h2>
+                <p>Samsung TV</p>
+                <div class="radio__button">
+                    <label class="switch">
+                        <input type="checkbox" value="television" onclick="sendRequest(event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="appliance" id="speaker">
+                <!-- SPEAKER SVG START -->
+                <img src="./img/icons/speaker.svg" alt="" class="appliance__icon">
+                <!-- SPEAKER SVG END -->
+                <h2 class="appliance__heading">Speaker</h2>
+                <p>Bose AX711</p>
+                <div class="radio__button">
+                    <label class="switch">
+                        <input type="checkbox" value="speaker" onclick="sendRequest(event)">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- All Appliances End -->
+    <!-- Footer Start -->
+    <footer>
+        <a class="footer__item footer__item__active" href="">
+            <!-- Home SVG -->
+            <img class="footer__item__icon" src="./img/icons/home.svg" alt="Home">
+        </a>
+        <a class="footer__item" href="">
+            <!-- User SVG -->
+            <img class="footer__item__icon" src="./img/icons/user.svg" alt="User">
+
+        </a>
+        <a class="footer__item" href="">
+            <!-- Add SVG -->
+            <img class="footer__item__icon" src="./img/icons/add.svg" alt="Add">
+        </a>
+        <a class="footer__item" href="">
+            <!-- Setting SVG -->
+            <img class="footer__item__icon" src="./img/icons/setting.svg" alt="Settings">
+        </a>
+        <a class="footer__item" href="">
+            <!-- Dots SVG -->
+            <img class="footer__item__icon" src="./img/icons/dots.svg" alt="More">
+
+        </a>
+    </footer>
+    <!-- Footer End -->
+    <!-- Desktop View Start -->
+    <h1 class="desktop__view">Desktop/Laptop view coming soon.</h1>
+    <!-- Desktop View End -->
+
+
+    <!-- JavaScript -->
+    <script src="./js/index..js"></script>
+</body>
+
+</html>
