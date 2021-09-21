@@ -1,4 +1,7 @@
 
+const BASE_URL = 'https://webappdemo.casaaltair.com'
+
+
 function sendRequest(event) {
     event.preventDefault();
     var url = "https://webappdemo.casaaltair.com/appliance"
@@ -91,3 +94,15 @@ menu.addEventListener('mousemove', (e) => {
     const walk = (x - startX) * 1; //scroll-fast
     menu.scrollLeft = scrollLeft - walk;
 });
+
+
+// Fetch Initial Data From Server
+const getInitialData = ()=>{
+    let url = BASE_URL + '/control'
+    console.log(url)
+    fetch(url).then(respone =>{
+        console.log(respone)
+    })    
+
+}
+getInitialData();
