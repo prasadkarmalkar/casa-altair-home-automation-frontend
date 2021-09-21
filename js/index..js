@@ -88,6 +88,6 @@ menu.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - menu.offsetLeft;
-    const walk = (x - startX) * 3; //scroll-fast
+    const walk = (x - startX) * 1; //scroll-fast
     menu.scrollLeft = scrollLeft - walk;
 });
