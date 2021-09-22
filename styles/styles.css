@@ -71,16 +71,12 @@ body {
   background-color: #FDFDFD;
   margin-top: -80px;
   border-radius: 2.5rem 2.5rem 0px 0px;
-}
+  padding-top: 40px;
 
-.row__first {
-  padding-top: 40px !important;
-}
-
-.row {
-  padding: 20px 0px;
+  /* For Aligning Items  */
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .appliance {
@@ -89,7 +85,7 @@ body {
   border-radius: 19px;
   height: 150px;
   width: 150px;
-  margin: 0px 10px 0px 10px;
+  margin: 0 10px 10px 0px;
   padding-left: 20px;
   padding-top: 10px;
   text-align: left;
