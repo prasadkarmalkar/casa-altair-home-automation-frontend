@@ -52,23 +52,6 @@ async function getInitialData() {
         }
         jsondata = await rawdata.json()
 
-        // Converting 1st letter Capital Of Room Names 
-        for (var i = 0; i < jsondata["Room Name"].length; i++) {
-            jsondata["Room Name"][i].room_name = jsondata["Room Name"][i].room_name.charAt(0).toUpperCase() + jsondata["Room Name"][i].room_name.substr(1);
-        }
-        // Converting 1st letter Capital Of Appliances
-        for (var i = 0; i < jsondata["Appliance Data"].length; i++) {
-            jsondata["Appliance Data"][i].appliance_id = jsondata["Appliance Data"][i].appliance_id.charAt(0).toUpperCase() + jsondata["Appliance Data"][i].appliance_id.substr(1);
-        }
-        // Displaying Menu 
-        jsondata["Room Name"].forEach(element => {
-            if (element.room_id == 1) {
-                menu.innerHTML = menu.innerHTML + "<li class='active'>" + element.room_name + "</li>";
-            }
-            else {
-                menu.innerHTML = menu.innerHTML + "<li>" + element.room_name + "</li>";
-            }
-        });
         // Displaying all appliances
         let appliancesrawhtml = jsondata["Appliance Data"].map((appliance) => {
             var startingdiv = `<div class="appliance ${appliance.appliance_id}" >`;
@@ -101,6 +84,42 @@ async function getInitialData() {
 }
 getInitialData();
 
+// To Get Menu Data Only One Time
+async function getInitialMenuData() {
+    let url = BASE_URL + '/control'
+    try {
+        let rawdata = await fetch_custom(url)
+        if (rawdata.status !== 200) {
+            alert("Communication Error");
+            return;
+        }
+        jsondata = await rawdata.json()
+        // Converting 1st letter Capital Of Room Names 
+        for (var i = 0; i < jsondata["Room Name"].length; i++) {
+            jsondata["Room Name"][i].room_name = jsondata["Room Name"][i].room_name.charAt(0).toUpperCase() + jsondata["Room Name"][i].room_name.substr(1);
+        }
+        // Converting 1st letter Capital Of Appliances
+        for (var i = 0; i < jsondata["Appliance Data"].length; i++) {
+            jsondata["Appliance Data"][i].appliance_id = jsondata["Appliance Data"][i].appliance_id.charAt(0).toUpperCase() + jsondata["Appliance Data"][i].appliance_id.substr(1);
+        }
+        // Displaying Menu 
+        jsondata["Room Name"].forEach(element => {
+            if (element.room_id == 1) {
+                menu.innerHTML = menu.innerHTML + "<li class='active'>" + element.room_name + "</li>";
+            }
+            else {
+                menu.innerHTML = menu.innerHTML + "<li>" + element.room_name + "</li>";
+            }
+        });
+    } catch (error) {
+        alert("Communication Error");
+        console.log(error);
+    }
+
+}
+getInitialMenuData();
+
+
 async function sendRequest(event) {
     event.preventDefault();
 
@@ -111,7 +130,7 @@ async function sendRequest(event) {
     var data = {
         room: 'living room',
         appliance: event.target.id,
-        app_status: checkradio? "on" : "off"
+        app_status: checkradio ? "on" : "off"
     }
 
     if (jsondata) {
@@ -172,6 +191,6 @@ async function sendRequest(event) {
 }
 
 // Loop For Getting Latest Data Every Time 2 Seconds 
-window.setInterval(function(){
+window.setInterval(function () {
     getInitialData();
-},2000)
+}, 2000)
