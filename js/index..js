@@ -71,14 +71,15 @@ async function getInitialData() {
         });
         // Displaying all appliances
         let appliancesrawhtml = jsondata["Appliance Data"].map((appliance) => {
-            var startingdiv = `<div class="appliance" id="${appliance.appliance_id}">`;
-            var inputtag = `<input type="checkbox" value="${appliance.appliance_id}" onclick="sendRequest(event)"></input>`
+            var startingdiv = `<div class="appliance ${appliance.appliance_id}" >`;
+            var inputtag = `<input type="checkbox"  name="${appliance.appliance_id}" value="${appliance.appliance_id}"></input>`
             if (appliance.appliance_condition == 1) {
-                startingdiv = `<div class="appliance appliance__active" id="${appliance.appliance_id}">`
-                inputtag = `<input type="checkbox" value="${appliance.appliance_id}" onclick="sendRequest(event)" checked></input>`
+                startingdiv = `<div class="appliance appliance__active ${appliance.appliance_id}">`
+                inputtag = `<input type="checkbox"  name="${appliance.appliance_id}"value="${appliance.appliance_id}"checked></input>`
             }
             let applianceraw =
-                `${startingdiv}    
+                `${startingdiv}
+                <a onclick="sendRequest(event)" id="${appliance.appliance_id}" class="appliance__clickable"></a>     
                     <img src="./img/icons/air_conditioner.svg" alt="Air Conditioner" class="appliance__icon">
                     <h2 class="appliance__heading">${appliance.appliance_name}</h2>
                         <div class="radio__button">
@@ -105,14 +106,17 @@ async function sendRequest(event) {
 
     var url = BASE_URL + "/appliance"
     var method = "POST"
+    const on_off = document.getElementsByName(event.target.id);
+    var checkradio = on_off[0].checked
     var data = {
         room: 'living room',
-        appliance: event.target.value,
-        app_status: event.target.checked ? "on" : "off"
+        appliance: event.target.id,
+        app_status: checkradio? "on" : "off"
     }
+
     if (jsondata) {
         var cappliance = jsondata["Appliance Data"].map((appliance) => {
-            if (appliance.appliance_id == event.target.value) {
+            if (appliance.appliance_id == event.target.id) {
                 var condition_changed = 0;
                 if (appliance.appliance_condition == 0) {
                     condition_changed = 1;
@@ -145,13 +149,13 @@ async function sendRequest(event) {
                             return;
                         }
                         jsondata["Appliance Data"].forEach(element => {
-                            if (element.appliance_id == event.target.value) {
-                                event.target.checked = !event.target.checked;
-                                var x = document.getElementById(element.appliance_id);
-                                if (event.target.checked === true) {
-                                    x.classList.add('appliance__active');
+                            if (element.appliance_id == event.target.id) {
+                                on_off.checked = !on_off.checked;
+                                var x = document.getElementsByClassName(element.appliance_id);
+                                if (on_off.checked === true) {
+                                    x[0].classList.add('appliance__active');
                                 } else {
-                                    x.classList.remove('appliance__active');
+                                    x[0].classList.remove('appliance__active');
                                 }
                             }
                         });

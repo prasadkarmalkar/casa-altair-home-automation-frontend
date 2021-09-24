@@ -171,6 +171,15 @@ input:checked+.slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* Make Appliance Clickable Div */
+.appliance__clickable{
+  display: block;
+  position: absolute;
+  
+  width: 150px;
+  height: 150px;
+  z-index: 1 !important;
+}
 
 /* All Appliance Styles End */
 
@@ -185,6 +194,7 @@ footer {
   display: flex;
   justify-content: space-evenly;
   padding: 15px 0px;
+  z-index: 2;
 }
 
 .footer__item {
