@@ -1,4 +1,5 @@
 
+// Function For Custom Fetch with timeout
 function fetch_custom(url, options, timeout = 5000) {
     return Promise.race([
         fetch(url, options),
@@ -50,6 +51,15 @@ async function getInitialData() {
             return;
         }
         jsondata = await rawdata.json()
+
+        // Converting 1st letter Capital Of Room Names 
+        for (var i = 0; i < jsondata["Room Name"].length; i++) {
+            jsondata["Room Name"][i].room_name = jsondata["Room Name"][i].room_name.charAt(0).toUpperCase() + jsondata["Room Name"][i].room_name.substr(1);
+        }
+        // Converting 1st letter Capital Of Appliances
+        for (var i = 0; i < jsondata["Appliance Data"].length; i++) {
+            jsondata["Appliance Data"][i].appliance_id = jsondata["Appliance Data"][i].appliance_id.charAt(0).toUpperCase() + jsondata["Appliance Data"][i].appliance_id.substr(1);
+        }
         // Displaying Menu 
         jsondata["Room Name"].forEach(element => {
             if (element.room_id == 1) {
@@ -84,7 +94,7 @@ async function getInitialData() {
 
     } catch (error) {
         alert("Communication Error");
-        console.error(error);
+        console.log(error);
     }
 
 }
@@ -145,8 +155,8 @@ async function sendRequest(event) {
                                 }
                             }
                         });
-                        jsondata["Appliance Data"] = json["Appliance Data"];
-
+                        // jsondata["Appliance Data"] = json["Appliance Data"];
+                        getInitialData();
                     }).catch(error => {
                         alert("Communication Error");
                     })
@@ -155,4 +165,9 @@ async function sendRequest(event) {
     } else {
         alert("Something Went Wrong");
     }
-    }
+}
+
+// Loop For Getting Latest Data Every Time 2 Seconds 
+window.setInterval(function(){
+    getInitialData();
+},2000)
